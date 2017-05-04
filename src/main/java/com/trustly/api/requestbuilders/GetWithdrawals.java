@@ -27,29 +27,29 @@ package com.trustly.api.requestbuilders;
 import com.trustly.api.commons.Method;
 import com.trustly.api.data.request.Request;
 import com.trustly.api.data.request.RequestParameters;
-import com.trustly.api.data.request.requestdata.ApproveWithdrawalData;
+import com.trustly.api.data.request.requestdata.GetWithdrawalsData;
 import com.trustly.api.security.SignatureHandler;
 
 /**
- * Creates a ApproveWithdrawal request ready to be sent to Trustly API.
- * The constructor contains the required fields of a ApproveWithdrawal request
+ * Creates a GetWithdrawals request ready to be sent to Trustly API.
+ * The constructor contains the required fields of a GetWithdrawals request.
  *
  * Builder lets you add additional information if any is available for the given request.
  *
  * The API specifics of the request can be found on https://trustly.com/en/developer/
  *
- * Example use for a default ApproveWithdrawal request:
- * Request approveWithdrawal = new ApproveWithdrawal.Build(orderid).getRequest();
+ * Example use for a default GetWithdrawals request:
+ * Request getWithdrawals = new GetWithdrawals.Build(orderID).getRequest();
  */
-public class ApproveWithdrawal {
+public class GetWithdrawals {
     private final Request request = new Request();
 
-    private ApproveWithdrawal(final Build builder) {
+    private GetWithdrawals(final Build builder) {
         final RequestParameters params = new RequestParameters();
         params.setUUID(SignatureHandler.generateNewUUID());
         params.setData(builder.data);
 
-        request.setMethod(Method.APPROVE_WITHDRAWAL);
+        request.setMethod(Method.GET_WITHDRAWALS);
         request.setParams(params);
     }
 
@@ -58,14 +58,14 @@ public class ApproveWithdrawal {
     }
 
     public static class Build {
-        private final ApproveWithdrawalData data = new ApproveWithdrawalData();
+        private final GetWithdrawalsData data = new GetWithdrawalsData();
 
         public Build(final String orderID) {
             data.setOrderID(orderID);
         }
 
         public Request getRequest() {
-            return new ApproveWithdrawal(this).getRequest();
+            return new GetWithdrawals(this).getRequest();
         }
     }
 }

@@ -24,22 +24,19 @@
 
 package com.trustly.api.data.response;
 
-import java.util.Map;
-import java.util.TreeMap;
-
 import com.trustly.api.commons.Method;
 
 public class Result {
     private String signature;
     private String uuid;
     private Method method;
-    private Map<String, Object> data;
+    private Object data;
 
     public String getSignature() {
         return signature;
     }
 
-    public void setSignature(String signature) {
+    public void setSignature(final String signature) {
         this.signature = signature;
     }
 
@@ -47,7 +44,7 @@ public class Result {
         return uuid;
     }
 
-    public void setUuid(String uuid) {
+    public void setUuid(final String uuid) {
         this.uuid = uuid;
     }
 
@@ -55,15 +52,20 @@ public class Result {
         return method;
     }
 
-    public void setMethod(Method method) {
+    public void setMethod(final Method method) {
         this.method = method;
     }
 
-    public Map<String, Object> getData() {
+    public Object getData() {
         return data;
     }
 
-    public void setData(Map<String, Object> data) {
-        this.data = new TreeMap<String, Object>(data);
+    public void setData(final Object data) {
+        this.data = data;
+    }
+
+    @Override
+    public String toString() {
+        return "\tSIGNATURE: " + signature +  "\n\tUUID: " + uuid + "\n\tMETHOD: " + method + "\n\tDATA: " + data;
     }
 }

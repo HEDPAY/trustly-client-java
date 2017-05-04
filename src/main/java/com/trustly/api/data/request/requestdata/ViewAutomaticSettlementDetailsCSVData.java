@@ -22,22 +22,31 @@
  * THE SOFTWARE.
  */
 
-package com.trustly.api.commons.exceptions;
+package com.trustly.api.data.request.requestdata;
 
-public class TrustlyDataException extends TrustlyAPIException {
+import com.google.gson.annotations.SerializedName;
+import com.trustly.api.commons.Currency;
+import com.trustly.api.data.request.RequestData;
 
-    public TrustlyDataException() {
+public class ViewAutomaticSettlementDetailsCSVData extends RequestData {
+    @SerializedName("SettlementDate")
+    private String settlementDate;
+    @SerializedName("Currency")
+    private Currency currency;
+
+    public String getSettlementDate() {
+        return settlementDate;
     }
 
-    public TrustlyDataException(final String message) {
-        super(message);
+    public void setSettlementDate(final String settlementDate) {
+        this.settlementDate = settlementDate;
     }
 
-    public TrustlyDataException(final String message, final Throwable cause) {
-        super(message, cause);
+    public Currency getCurrency() {
+        return currency;
     }
 
-    public TrustlyDataException(final Throwable e) {
-        super(e);
+    public void setCurrency(final Currency currency) {
+        this.currency = currency;
     }
 }

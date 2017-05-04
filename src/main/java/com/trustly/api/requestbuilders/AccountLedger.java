@@ -24,32 +24,33 @@
 
 package com.trustly.api.requestbuilders;
 
+import com.trustly.api.commons.Currency;
 import com.trustly.api.commons.Method;
 import com.trustly.api.data.request.Request;
 import com.trustly.api.data.request.RequestParameters;
-import com.trustly.api.data.request.requestdata.ApproveWithdrawalData;
+import com.trustly.api.data.request.requestdata.AccountLedgerData;
 import com.trustly.api.security.SignatureHandler;
 
 /**
- * Creates a ApproveWithdrawal request ready to be sent to Trustly API.
- * The constructor contains the required fields of a ApproveWithdrawal request
+ * Creates an AccountLedger request ready to be sent to Trustly API.
+ * The constructor contains the required fields of an AccountLedger request.
  *
  * Builder lets you add additional information if any is available for the given request.
  *
  * The API specifics of the request can be found on https://trustly.com/en/developer/
  *
- * Example use for a default ApproveWithdrawal request:
- * Request approveWithdrawal = new ApproveWithdrawal.Build(orderid).getRequest();
+ * Example use for a default AccountLedger request:
+ * Request accountLedger = new AccountLedger.Build(fromDate, toDate, currency).getRequest();
  */
-public class ApproveWithdrawal {
+public class AccountLedger {
     private final Request request = new Request();
 
-    private ApproveWithdrawal(final Build builder) {
+    private AccountLedger(final Build builder) {
         final RequestParameters params = new RequestParameters();
         params.setUUID(SignatureHandler.generateNewUUID());
         params.setData(builder.data);
 
-        request.setMethod(Method.APPROVE_WITHDRAWAL);
+        request.setMethod(Method.ACCOUNT_LEDGER);
         request.setParams(params);
     }
 
@@ -58,14 +59,16 @@ public class ApproveWithdrawal {
     }
 
     public static class Build {
-        private final ApproveWithdrawalData data = new ApproveWithdrawalData();
+        private final AccountLedgerData data = new AccountLedgerData();
 
-        public Build(final String orderID) {
-            data.setOrderID(orderID);
+        public Build(final String fromDate, final String toDate, final Currency currency) {
+            data.setFromDate(fromDate);
+            data.setToDate(toDate);
+            data.setCurrency(currency);
         }
 
         public Request getRequest() {
-            return new ApproveWithdrawal(this).getRequest();
+            return new AccountLedger(this).getRequest();
         }
     }
 }

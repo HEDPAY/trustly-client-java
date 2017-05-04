@@ -22,22 +22,9 @@
  * THE SOFTWARE.
  */
 
-package com.trustly.api.commons.exceptions;
+package com.trustly.api.data.request.requestdata;
 
-public class TrustlyDataException extends TrustlyAPIException {
+import com.trustly.api.data.request.RequestData;
 
-    public TrustlyDataException() {
-    }
-
-    public TrustlyDataException(final String message) {
-        super(message);
-    }
-
-    public TrustlyDataException(final String message, final Throwable cause) {
-        super(message, cause);
-    }
-
-    public TrustlyDataException(final Throwable e) {
-        super(e);
-    }
+public class BalanceData extends RequestData {
 }

@@ -39,6 +39,18 @@ public enum Method {
     @SerializedName("DenyWithdrawal")
     DENY_WITHDRAWAL("DenyWithdrawal"),
 
+    @SerializedName("AccountLedger")
+    ACCOUNT_LEDGER("AccountLedger"),
+
+    @SerializedName("ViewAutomaticSettlementDetailsCSV")
+    VIEW_AUTOMATIC_SETTLEMENT_DETAILS_CSV("ViewAutomaticSettlementDetailsCSV"),
+
+    @SerializedName("Balance")
+    BALANCE("Balance"),
+
+    @SerializedName("GetWithdrawals")
+    GET_WITHDRAWALS("GetWithdrawals"),
+
     @SerializedName("Refund")
     REFUND("Refund"),
 
@@ -59,15 +71,15 @@ public enum Method {
 
     private final String jsonName;
 
-    private Method(String s) {
+    Method(final String s) {
         jsonName = s;
     }
 
-    public boolean equalsName(String otherName){
+    public boolean equalsName(final String otherName) {
         return otherName != null && jsonName.equals(otherName);
     }
 
-    public String toString(){
+    public String toString() {
         return jsonName;
     }
 }

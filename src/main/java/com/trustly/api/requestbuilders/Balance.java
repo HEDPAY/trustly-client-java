@@ -27,29 +27,29 @@ package com.trustly.api.requestbuilders;
 import com.trustly.api.commons.Method;
 import com.trustly.api.data.request.Request;
 import com.trustly.api.data.request.RequestParameters;
-import com.trustly.api.data.request.requestdata.ApproveWithdrawalData;
+import com.trustly.api.data.request.requestdata.BalanceData;
 import com.trustly.api.security.SignatureHandler;
 
 /**
- * Creates a ApproveWithdrawal request ready to be sent to Trustly API.
- * The constructor contains the required fields of a ApproveWithdrawal request
+ * Creates a Balance request ready to be sent to Trustly API.
+ * The constructor contains the required fields of a Balance request.
  *
  * Builder lets you add additional information if any is available for the given request.
  *
  * The API specifics of the request can be found on https://trustly.com/en/developer/
  *
- * Example use for a default ApproveWithdrawal request:
- * Request approveWithdrawal = new ApproveWithdrawal.Build(orderid).getRequest();
+ * Example use for a default Balance request:
+ * Request balance = new Balance.Build().getRequest();
  */
-public class ApproveWithdrawal {
+public class Balance {
     private final Request request = new Request();
 
-    private ApproveWithdrawal(final Build builder) {
+    private Balance(final Build builder) {
         final RequestParameters params = new RequestParameters();
         params.setUUID(SignatureHandler.generateNewUUID());
         params.setData(builder.data);
 
-        request.setMethod(Method.APPROVE_WITHDRAWAL);
+        request.setMethod(Method.BALANCE);
         request.setParams(params);
     }
 
@@ -58,14 +58,10 @@ public class ApproveWithdrawal {
     }
 
     public static class Build {
-        private final ApproveWithdrawalData data = new ApproveWithdrawalData();
-
-        public Build(final String orderID) {
-            data.setOrderID(orderID);
-        }
+        private final BalanceData data = new BalanceData();
 
         public Request getRequest() {
-            return new ApproveWithdrawal(this).getRequest();
+            return new Balance(this).getRequest();
         }
     }
 }

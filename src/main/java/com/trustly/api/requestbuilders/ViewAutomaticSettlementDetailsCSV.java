@@ -24,32 +24,35 @@
 
 package com.trustly.api.requestbuilders;
 
+import java.util.Map;
+
+import com.trustly.api.commons.Currency;
 import com.trustly.api.commons.Method;
 import com.trustly.api.data.request.Request;
 import com.trustly.api.data.request.RequestParameters;
-import com.trustly.api.data.request.requestdata.ApproveWithdrawalData;
+import com.trustly.api.data.request.requestdata.ViewAutomaticSettlementDetailsCSVData;
 import com.trustly.api.security.SignatureHandler;
 
 /**
- * Creates a ApproveWithdrawal request ready to be sent to Trustly API.
- * The constructor contains the required fields of a ApproveWithdrawal request
+ * Creates a ViewAutomaticSettlementDetailsCSV request ready to be sent to Trustly API.
+ * The constructor contains the required fields of a ViewAutomaticSettlementDetailsCSV request.
  *
  * Builder lets you add additional information if any is available for the given request.
  *
  * The API specifics of the request can be found on https://trustly.com/en/developer/
  *
- * Example use for a default ApproveWithdrawal request:
- * Request approveWithdrawal = new ApproveWithdrawal.Build(orderid).getRequest();
+ * Example use for a default ViewAutomaticSettlementDetailsCSV request:
+ * Request viewAutomaticSettlementDetailsCsv = new ViewAutomaticSettlementDetailsCSV.Build(settlementDate, currency).getRequest();
  */
-public class ApproveWithdrawal {
+public class ViewAutomaticSettlementDetailsCSV {
     private final Request request = new Request();
 
-    private ApproveWithdrawal(final Build builder) {
+    private ViewAutomaticSettlementDetailsCSV(final Build builder) {
         final RequestParameters params = new RequestParameters();
         params.setUUID(SignatureHandler.generateNewUUID());
         params.setData(builder.data);
 
-        request.setMethod(Method.APPROVE_WITHDRAWAL);
+        request.setMethod(Method.VIEW_AUTOMATIC_SETTLEMENT_DETAILS_CSV);
         request.setParams(params);
     }
 
@@ -58,14 +61,18 @@ public class ApproveWithdrawal {
     }
 
     public static class Build {
-        private final ApproveWithdrawalData data = new ApproveWithdrawalData();
+        private final ViewAutomaticSettlementDetailsCSVData data = new ViewAutomaticSettlementDetailsCSVData();
+        // Kept for future use
+        private final Map<String, Object> attributes = null;
 
-        public Build(final String orderID) {
-            data.setOrderID(orderID);
+        public Build(final String settlementDate, final Currency currency) {
+            data.setSettlementDate(settlementDate);
+            data.setCurrency(currency);
+            data.setAttributes(attributes);
         }
 
         public Request getRequest() {
-            return new ApproveWithdrawal(this).getRequest();
+            return new ViewAutomaticSettlementDetailsCSV(this).getRequest();
         }
     }
 }

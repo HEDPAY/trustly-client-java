@@ -22,22 +22,20 @@
  * THE SOFTWARE.
  */
 
-package com.trustly.api.commons.exceptions;
+package com.trustly.api.data.request.requestdata;
 
-public class TrustlyDataException extends TrustlyAPIException {
+import com.google.gson.annotations.SerializedName;
+import com.trustly.api.data.request.RequestData;
 
-    public TrustlyDataException() {
+public class GetWithdrawalsData extends RequestData {
+    @SerializedName("OrderID")
+    private String orderID;
+
+    public String getOrderID() {
+        return orderID;
     }
 
-    public TrustlyDataException(final String message) {
-        super(message);
-    }
-
-    public TrustlyDataException(final String message, final Throwable cause) {
-        super(message, cause);
-    }
-
-    public TrustlyDataException(final Throwable e) {
-        super(e);
+    public void setOrderID(final String orderID) {
+        this.orderID = orderID;
     }
 }
